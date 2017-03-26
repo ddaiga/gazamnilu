@@ -92,33 +92,78 @@ table {
 }
 body{
 	background-color: black;
+	font-family: Arial;
+
 
 }
 
 .piemineklis {
 	margin:auto;
-	max-width: 60rem;
+	max-width: 38rem;
 	background-image: url(piemineklis.jpg);
 	height:100vh;
 	background-size:contain;
 	background-repeat: no-repeat;
 	background-position: center bottom; 
+	color:white;
+	display: flex;
+	flex-direction:column;
+	justify-content:flex-end;
 }
+
+h1{
+	font-size: 4rem;
+	text-align: center;
+	margin-bottom: 3rem;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+p{
+	font-size: 3rem;
+	margin-bottom: 2rem;
+	line-height: 3.5rem;
+}
+
+.large-button{
+	color: white;
+	border: 3px solid white;
+	font-size: 1.5rem;
+	line-height: 2rem;
+	display: block;
+	width: 80%;
+	background-color: black;
+	text-align: center;
+	text-decoration: none;
+	text-transform: uppercase;
+	align-self:center;
+	margin-bottom:1rem;
+}
+
+@media (min-width: 38rem) {
+	.large-button{
+		color: white;
+		border: 3px solid white;
+		font-size: 3rem;
+		line-height: 4rem;
+		display: block;
+		width: 80%;
+		background-color: black;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		align-self:center;
+		margin-bottom: 1rem;
+	}
+}
+
 
 @media (min-width: 60rem) {
 	.piemineklis {
-		margin-top: 4rem;
 	}
 
 }
 
-
-.piemineklis-wrapper {
-}
-.piemineklis-img {
-	max-width: 100%;
-	height: auto;
-}
 
 
 	</style>
@@ -126,46 +171,16 @@ body{
 </head>
 <body>
 	
-<!-- 	<div class="piemineklis">
-
+	<div class="piemineklis">
+		<h1>Gāžam Nilu</h1>
+		<p>Šogad 58% Rīdzinieku ir gatavi iaunam mēram – populārākais ir Mārtinš Bondars ar 29% atbalstītāju.</p>
+		<p>Parādi, ka Mārtiņu atbalsti arī Tu un balso jau 3. jūnijā.</p>
+		<a href="#" class="large-button">Spied, lai<br>gāztu Nilu</a>
 	</div>
- -->
 
 
 
-<div id="shereBlock" class="shereBlock">
-	<h1>Virsraksts</h1>
-</div>
 
-
-
-<video id="videoID" >
-
-     <source src="video_test.mp4" type="video/mp4" />
-</video>
-
-<a href="#" id="play" onclick="vidplay()">&gt;</a>
-
-
-
-<script type="text/javascript">
-function vidplay() {
-     var video = document.getElementById("videoID");
-     var button = document.getElementById("play");
-     video.play();
-
-  }
-
-
-document.getElementById('videoID').addEventListener('ended',myHandler,false);
-function myHandler(e) {
-
-	document.getElementById("shereBlock").className += " shereBlock--visible";
-    // What you want to do after the event
-}
-
-
-</script>
 
 <a href="#" class="button--facebook" id="shareBtn">
                 <span class="button__icon"></span>
