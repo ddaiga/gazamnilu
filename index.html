@@ -98,9 +98,10 @@ body{
 }
 
 .piemineklis {
+	position: relative;
 	margin:auto;
 	max-width: 38rem;
-	background-image: url(piemineklis.jpg);
+	background: url(piemineklis.jpg);
 	height:100vh;
 	background-size:contain;
 	background-repeat: no-repeat;
@@ -109,7 +110,19 @@ body{
 	display: flex;
 	flex-direction:column;
 	justify-content:flex-end;
+	z-index: -2;
 }
+
+.piemineklis::before{
+  background-color: rgba(0, 0, 0, 0.5);
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  z-index: -1;
+}
+
 
 h1{
 	font-size: 4rem;
