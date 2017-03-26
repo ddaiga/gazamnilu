@@ -93,9 +93,7 @@ table {
 body{
 	background-color: black;
 	font-family: Arial;
-	z-index: -5;
-
-
+	position: relative;
 }
 
 .piemineklis {
@@ -108,10 +106,13 @@ body{
 	background-repeat: no-repeat;
 	background-position: center bottom; 
 	color:white;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction:column;
-	justify-content:flex-end;
-	z-index: -2;
+	-ms-flex-direction:column;
+	    flex-direction:column;
+	-ms-flex-pack:end;
+	    justify-content:flex-end;
+
 }
 
 .piemineklis::before{
@@ -121,7 +122,6 @@ body{
   height: 100%;
   position: absolute;
   width: 100%;
-  z-index: -1;
 }
 
 
@@ -131,6 +131,7 @@ h1{
 	margin-bottom: 3rem;
 	text-transform: uppercase;
 	font-weight: bold;
+		z-index: 8;
 }
 
 p{
@@ -138,11 +139,12 @@ p{
 	margin-bottom: 1rem;
 	line-height: 2rem;
 	padding-left: 2rem;
+		z-index: 8;
 }
 
 .large-button{
 	color: white;
-	/*border: 3px solid white;*/
+	border: 3px solid white;
 	font-size: 1.5rem;
 	line-height: 2rem;
 	width: 80%;
@@ -151,12 +153,14 @@ p{
 	text-decoration: none;
 	text-transform: uppercase;
 	align-self:center;
+	display: block;
 	margin-bottom:1rem;
+	z-index: 8;
 }
 
 .large-button:hover{
 	background-color: #2c2c2c;
-	/*border: 3px solid red;*/
+	border: 3px solid white;
 }
 
 @media (min-width: 38rem) {
@@ -177,93 +181,135 @@ p{
 	}
 }
 
-
-@media (min-width: 60rem) {
-	.piemineklis {
-	}
-
+#share-menu{
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.9);
+	transition: all 0.5s;
+	top: 0;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	z-index: 24;
+	transform: translate3d(0, -100%, 0);
 }
 
 
+#share-menu.open{
+	transition: all 0.5s;
+transform: translate3d(0, 0, 0);
+}
+
+
+
+.button-soc{
+	font-size: 3rem;
+	line-height: 6rem;
+	color:white;
+	text-decoration: none;
+	text-align: center;
+}
+
+
+.menu-flex{
+	height: 100%;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-direction:column;
+	    flex-direction:column;
+	-ms-flex-pack:center;
+	    justify-content:center;
+}
 
 	</style>
 
 </head>
 <body>
 	
-	<ul class="piemineklis">
-		<li><h1>Gāžam Nilu</h1></li>
-		<li><p>Šogad 58% rīdzinieku ir gatavi jaunam mēram – populārākais ir Mārtinš Bondars ar 29% atbalstītāju.</p></li>
-		<li><p>Parādi, ka Mārtiņu atbalsti arī Tu un balso jau<br>3. jūnijā.</p></li>
-		<li><a href="#" class="large-button">Spied, lai<br>gāztu Nilu</a></li>
-		
-	</ul>
-		
+<div id="share-menu">
+
+	<div class="menu-flex">
 		
 
 
+	<a href="#" class="button-soc button--facebook" id="shareBtn">
+	        <span class="button__content">Facebook</span>
+	</a>
+
+	<script>
+	  window.fbAsyncInit = function() {
+	    FB.init({
+	      appId      : '649104121950918',
+	      xfbml      : true,
+	      version    : 'v2.8'
+	    });
+	    FB.AppEvents.logPageView();
+	  };
+
+	  (function(d, s, id){
+	     var js, fjs = d.getElementsByTagName(s)[0];
+	     if (d.getElementById(id)) {return;}
+	     js = d.createElement(s); js.id = id;
+	     js.src = "//connect.facebook.net/en_US/sdk.js";
+	     fjs.parentNode.insertBefore(js, fjs);
+	   }(document, 'script', 'facebook-jssdk'));
 
 
 
-<a href="#" class="button--facebook" id="shareBtn">
-                <span class="button__icon"></span>
-        <span class="button__content">Dalies FB</span>
-    </a>
+	  document.getElementById('shareBtn').onclick = function(e) {
+	      e.preventDefault();
+	      FB.ui( {
+	          method: "feed",
+	          name: "Es iešu gāzt Nilu!",
+	          link: "http://gazamnilu.lv",
+	          description: "3. jūnijā nāc arī Tu!",
+	          picture: "http://gazamnilu.lv/fb_share.jpg",
+	          caption: "gazamNilu.lv"
+	      }, function(response){
+	          ga('send', {
+	            hitType: 'event',
+	            eventCategory: 'Social share',
+	            eventAction: 'Result share Facebook',
+	            eventLabel: 'piemineklis'
+	          });
+	          
+	      });
+	  }
+	</script>
 
+
+	<a href="https://twitter.com/intent/tweet?text=Es%20ie%C5%A1u%20g%C4%81zt%20Nilu!%203.%20j%C5%ABnij%C4%81%20n%C4%81c%20ar%C4%AB%20Tu!;hashtags=gazamnilu" class="button-soc button--twitter" onclick="
+				      ga('send', {
+				        hitType: 'event',
+				        eventCategory: 'Social share',
+				        eventAction: 'Result share Twitter',
+				        eventLabel: 'piemineklis'
+				      });">
+	                <span class="button__icon"></span>
+	        <span class="button__content">Twitter</span>
+	    </a>
+
+	</div>
+
+
+</div>
+
+
+	<div class="piemineklis">
+		<h1>Gāžam Nilu</h1>
+		<p>Šogad 58% rīdzinieku ir gatavi jaunam mēram – populārākais ir Mārtinš Bondars ar 29% atbalstītāju.</p>
+		<p>Parādi, ka Mārtiņu atbalsti arī Tu un balso jau<br>3. jūnijā.</p>
+		<a class="large-button" id="openMenu">Spied, lai<br>gāztu Nilu</a>
+		
+	</div>
+		
 <script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '649104121950918',
-      xfbml      : true,
-      version    : 'v2.8'
-    });
-    FB.AppEvents.logPageView();
-  };
+  document.getElementById('openMenu').onclick = function(e) {
+	      e.preventDefault();
+	      var d = document.getElementById("share-menu");
+			d.className += " open";
 
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-
-
-
-  document.getElementById('shareBtn').onclick = function(e) {
-      e.preventDefault();
-      FB.ui( {
-          method: "feed",
-          name: "Es iešu gāzt Nilu!",
-          link: "http://gazamnilu.lv",
-          description: "3. jūnijā nāc arī Tu!",
-          picture: "http://gazamnilu.lv/fb_share.jpg",
-          caption: "gazamNilu.lv"
-      }, function(response){
-          ga('send', {
-            hitType: 'event',
-            eventCategory: 'Social share',
-            eventAction: 'Result share Facebook',
-            eventLabel: 'piemineklis'
-          });
-          
-      });
-  }
-
-
-</script>
-
-
-<a href="https://twitter.com/intent/tweet?text=Es%20ie%C5%A1u%20g%C4%81zt%20Nilu!%203.%20j%C5%ABnij%C4%81%20n%C4%81c%20ar%C4%AB%20Tu!;hashtags=gazamnilu" class="button button__social button__social--twitter" onclick="
-			      ga('send', {
-			        hitType: 'event',
-			        eventCategory: 'Social share',
-			        eventAction: 'Result share Twitter',
-			        eventLabel: 'piemineklis'
-			      });">
-                <span class="button__icon"></span>
-        <span class="button__content">Tweet</span>
-    </a>
+	  };
+</script>		
 
 
 </body>
